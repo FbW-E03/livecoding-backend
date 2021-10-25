@@ -1,0 +1,3 @@
+## Running
+
+`node lottery.js`
