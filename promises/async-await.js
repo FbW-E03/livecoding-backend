@@ -5,7 +5,8 @@ const axios = require("axios");
 async function getCatData() {
     const result = await axios.get("https://cat-fact.herokuapp.com/facts");
 
-    console.log(result.data);
+    //console.log(result.data);
+    return result.data;
 }
 
 const data = getCatData();
