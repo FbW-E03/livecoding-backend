@@ -1,0 +1,28 @@
+const dotenv = require("dotenv");
+const express = require("express");
+const mongoose = require("mongoose");
+const planetsRoutes = require("./routes/planets");
+
+dotenv.config();
+const app = express();
+
+const { MONGO_DB_USERNAME, MONGO_DB_PASSWORD, MONGO_DB_DATABASE_NAME } =
+  process.env;
+
+mongoose
+  .connect(
+    `mongodb+srv://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@cluster0.fczes.mongodb.net/${MONGO_DB_DATABASE_NAME}?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    console.log("Database connected successfully! 🥳");
+  })
+  .catch((error) => {
+    console.log("Database connected failed ☹️");
+    console.log(error);
+  });
+
+app.use("/planets", planetsRoutes);
+
+app.listen(3001, () => {
+  console.log("The server is listening!!");
+});
