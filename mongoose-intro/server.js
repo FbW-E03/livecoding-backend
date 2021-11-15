@@ -6,6 +6,10 @@ const planetsRoutes = require("./routes/planets");
 dotenv.config();
 const app = express();
 
+// without this middleware, our client BODY object will be undefined
+// we use express.json() to parse the BODY JSON object
+app.use(express.json());
+
 const { MONGO_DB_USERNAME, MONGO_DB_PASSWORD, MONGO_DB_DATABASE_NAME } =
   process.env;
 
