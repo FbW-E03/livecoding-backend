@@ -14,10 +14,8 @@ router.get("/all", async (req, res) => {
 router.post("/new", async (req, res) => {
   const { body } = req;
 
-  // create new planet!
-  console.log(body);
-
   try {
+    // create new planet!
     await PlanetsModel.create({
       ...body,
     });
