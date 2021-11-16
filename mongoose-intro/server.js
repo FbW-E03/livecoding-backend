@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const planetsRoutes = require("./routes/planets");
+const satellitesRoutes = require("./routes/satellites");
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ mongoose
   });
 
 app.use("/planets", planetsRoutes);
+app.use("/satellites", satellitesRoutes);
 
 app.listen(3001, () => {
   console.log("The server is listening!!");

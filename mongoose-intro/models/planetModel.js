@@ -24,6 +24,6 @@ const PlanetSchema = new Schema({
   hasGlobalMagneticField: Boolean,
 });
 
-const Planet = model("planets", PlanetSchema);
+const Planets = model("planets", PlanetSchema);
 
-module.exports = Planet;
+module.exports = Planets;

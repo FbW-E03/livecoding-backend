@@ -1,11 +1,11 @@
 const express = require("express");
-const PlanetsModel = require("../models/planetModel");
+const Planets = require("../models/planetModel");
 const router = express.Router();
 
 // GET request
 router.get("/all", async (req, res) => {
   // find() returns an array of results
-  const planets = await PlanetsModel.find();
+  const planets = await Planets.find();
 
   res.send(planets);
 });
@@ -16,7 +16,7 @@ router.post("/new", async (req, res) => {
 
   try {
     // create new planet!
-    await PlanetsModel.create({
+    await Planets.create({
       ...body,
     });
   } catch (error) {
