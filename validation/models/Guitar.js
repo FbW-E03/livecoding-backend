@@ -2,7 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const GuitarSchema = new Schema({
   name: { type: String, required: true },
-  keywords: String,
+  // Array of strings
+  keywords: [{ type: String, required: true }],
   colour: {
     type: String,
     enum: ["red", "green", "blue"],
