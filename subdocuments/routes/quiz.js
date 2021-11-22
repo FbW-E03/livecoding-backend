@@ -17,4 +17,16 @@ router.post("/create", async (req, res) => {
   res.sendStatus(200);
 });
 
+router.get("/find/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const quiz = await Quiz.findById(id);
+
+    res.send(quiz);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;
