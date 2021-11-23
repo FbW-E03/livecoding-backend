@@ -23,10 +23,45 @@ router.post("/create", async (req, res) => {
 
 // "READ" in CRUD
 router.get("/all", async (req, res) => {
+  const guitars = await Guitar.find().lean();
+
+  res.send(guitars);
+});
+
+// "READ" in CRUD
+router.get("/advancedSearch", async (req, res) => {
   // TL;DR
   // use lean() to make accessing the database faster
   // use lean() to optimise your queries
-  const guitars = await Guitar.find().lean().limit();
+  // use limit() to limit the results from the database
+  // use sort() to sort the results on a key
+  // -1 means from highest to lowest
+  // 1 means from lowest to highest
+  const sortQuery = {};
+
+  if (req.query["price"]) {
+    sortQuery["price"] = req.query["price"];
+  }
+
+  if (req.query["name"]) {
+    sortQuery["name"] = req.query["name"];
+  }
+
+  const guitars = await Guitar.find().lean().limit(5).sort(sortQuery);
+
+  res.send(guitars);
+});
+
+// "READ" in CRUD
+router.get("/allByManufacturer", async (req, res) => {
+  // TL;DR
+  // use lean() to make accessing the database faster
+  // use lean() to optimise your queries
+  // use limit() to limit the results from the database
+  const guitars = await Guitar.find()
+    .lean()
+    .limit(5)
+    .select(["name", "manufacturer"]);
 
   res.send(guitars);
 });
