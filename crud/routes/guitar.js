@@ -23,7 +23,10 @@ router.post("/create", async (req, res) => {
 
 // "READ" in CRUD
 router.get("/all", async (req, res) => {
-  const guitars = await Guitar.find();
+  // TL;DR
+  // use lean() to make accessing the database faster
+  // use lean() to optimise your queries
+  const guitars = await Guitar.find().lean().limit();
 
   res.send(guitars);
 });
@@ -57,7 +60,7 @@ router.get("/search", async (req, res) => {
     query["keywords"] = req.query["keywords"];
   }
 
-  const guitars = await Guitar.find(query);
+  const guitars = await Guitar.find(query).lean();
 
   res.send(guitars);
 });
