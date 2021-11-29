@@ -1,0 +1,19 @@
+{
+  "title": "Drink and Fit",
+  "plot": "Getting drunk and exercising",
+  "languages": [ "english", "deutsch" ],
+  "reviews": [
+    {
+      "username": "boatface",
+      "text": "BESTEST FILM EVAH!!",
+      "rating": 10,
+      "created": 1638180420105
+    },
+    {
+      "username": "Earl Gray",
+      "text": "This film was not my cup of tea!",
+      "rating": 0,
+      "created": 1638180420105
+    }
+  ]
+}
