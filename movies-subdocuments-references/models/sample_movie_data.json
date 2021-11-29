@@ -2,6 +2,21 @@
   "title": "Drink and Fit",
   "plot": "Getting drunk and exercising",
   "languages": [ "english", "deutsch" ],
+  "tomatoes": {
+    "viewer": {
+      "rating": 44,
+      "numReviews": 2,
+      "meter": 3
+    },
+    "critic": {
+      "rating": 30,
+      "numReviews": 1,
+      "meter": 2
+    },
+    "fresh": 4,
+    "rotten": 3,
+    "lastUpdated": 1638180420105
+  },
   "reviews": [
     {
       "username": "boatface",
