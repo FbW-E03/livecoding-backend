@@ -28,6 +28,6 @@ const movieSchema = new Schema({
   reviews: [reviewSchema],
 });
 
-const Movie = model("quizzes", movieSchema);
+const Movie = model("movies", movieSchema);
 
 module.exports = Movie;
