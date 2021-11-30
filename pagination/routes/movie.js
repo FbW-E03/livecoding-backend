@@ -7,12 +7,17 @@ router.get("/search", async (req, res) => {
   const limit = Number(req.query["limit"]) || 20;
   const skip = Number(req.query["skip"]) || 0;
 
+  const lengthOfCollection = await Movie.estimatedDocumentCount();
+
   const movies = await Movie.find()
     .limit(limit) // expects a number
     .skip(skip) // expects a number
     .select(["title", "plot", "year"]);
 
-  res.send(movies);
+  res.send({
+    movies: movies,
+    length: lengthOfCollection,
+  });
 });
 
 module.exports = router;

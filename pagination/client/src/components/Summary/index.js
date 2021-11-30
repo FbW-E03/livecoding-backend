@@ -2,25 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Item from "./Item";
 
+import styles from "./index.module.css";
+
 export default function Summary() {
+  const limit = 20;
   const [results, setResults] = useState([]);
-  const [limit, setLimit] = useState(5);
   const [skip, setSkip] = useState(0);
+  const [lengthOfCollection, setLengthOfCollection] = useState(0);
 
   const handleSkipForward = () => {
-    setSkip(5 + skip);
+    // guard
+    if (skip >= lengthOfCollection) {
+      return;
+    }
+    setSkip(skip + limit);
   };
-  const handleSkipBackwards = () => {};
+  const handleSkipBackwards = () => {
+    // guard
+    if (skip <= 0) {
+      return;
+    }
+
+    setSkip(skip - limit);
+  };
 
   async function requestSummary() {
     try {
       const response = await axios.get(
         `http://localhost:3001/movies/search?limit=${limit}&skip=${skip}`
       );
-
-      setResults(response.data);
+      setResults(response.data["movies"]);
+      setLengthOfCollection(response.data["length"]);
       console.log(response.data);
     } catch (error) {
+      // runs if server returns status code other than 200
       console.log("Could not get data");
     }
   }
@@ -46,16 +61,11 @@ export default function Summary() {
   // into an array of React Elements (JSX)
 
   return (
-    <>
+    <div className={styles.container}>
       <h1>Movies</h1>
-      {results.map((result, index) => (
-        <Item
-          key={index}
-          title={result.title}
-          plot={result.plot}
-          year={result.year}
-        />
-      ))}
+      <p>
+        Viewing results {skip} - {skip + limit} of {lengthOfCollection}
+      </p>
       <ul>
         <li>
           <button onClick={handleSkipBackwards}>👈</button>
@@ -64,6 +74,14 @@ export default function Summary() {
           <button onClick={handleSkipForward}>👉</button>
         </li>
       </ul>
-    </>
+      {results.map((result, index) => (
+        <Item
+          key={index}
+          title={result.title}
+          plot={result.plot}
+          year={result.year}
+        />
+      ))}
+    </div>
   );
 }

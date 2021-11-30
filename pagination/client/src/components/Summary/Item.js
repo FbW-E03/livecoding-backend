@@ -1,10 +1,13 @@
+import styles from "./Item.module.css";
+
 // Presentational component or low level component
 export default function Item({ title, plot, year }) {
   return (
-    <>
-      <h1>{title}</h1>
-      <p>{plot}</p>
-      <p>{year}</p>
-    </>
+    <div className={styles.container}>
+      <p className={styles.title}>
+        {title}, <span>{year}</span>
+      </p>
+      <p className={styles.plot}>{plot}</p>
+    </div>
   );
 }
