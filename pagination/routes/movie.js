@@ -7,6 +7,7 @@ router.get("/search", async (req, res) => {
   const limit = Number(req.query["limit"]) || 20;
   const skip = Number(req.query["skip"]) || 0;
 
+  // get total length of collection
   const lengthOfCollection = await Movie.estimatedDocumentCount();
 
   const movies = await Movie.find()
