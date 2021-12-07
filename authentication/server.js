@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoute = require("./routes/user");
+const { authoriseJwtToken } = require("./middleware/auth");
 
 dotenv.config();
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 // without this middleware, our client BODY object will be undefined
 // we use express.json() to parse the BODY JSON object
 app.use(express.json());
+// app.use(cors());
 
 const { MONGO_DB_USERNAME, MONGO_DB_PASSWORD, MONGO_DB_DATABASE_NAME } =
   process.env;

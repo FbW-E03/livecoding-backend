@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const { issueJwt } = require("../helpers/jwt");
+const { issueJwt, verifyJwt } = require("../helpers/jwt");
 
 exports.register = async (req, res) => {
   const { body } = req;
@@ -63,4 +63,30 @@ exports.login = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error);
   }
+};
+
+// will modify the name of the user
+exports.modify = async (req, res) => {
+  const { name } = req.body;
+
+  // 1. Read the token req.headers property
+  // 2. Pull the token from the req.headers.authorization
+  // 3. Validate the token
+  // 4. Refactoring
+
+  try {
+    // How can I find the user in our users collection?
+    //const user = await User.findOne({ _id: req.userId }); // will also work
+    await User.findByIdAndUpdate(req.userId, {
+      name: name,
+    });
+
+    res.send("Update procedure was successful!");
+  } catch (error) {
+    res.status(500).send("That action is not allowed");
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  res.send(200);
 };
