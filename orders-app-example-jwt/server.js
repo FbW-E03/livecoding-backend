@@ -14,7 +14,11 @@ app.set("port", process.env.PORT || 4000);
 // middleware stack
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors()); // <-- will need to change
+app.use(
+  cors({
+    credentials: true,
+  })
+); // <-- will need to change
 // read the cookie and add it to the request object under the prop "cookies"
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -42,6 +46,7 @@ const customerRoutes = require("./routes/customerRoutes");
 const productRoutes = require("./routes/productRoutes");
 const inventoryRoutes = require("./routes/inventoryRoutes");
 const userRoutes = require("./routes/userRoutes");
+const path = require("path");
 
 app.use("/api/orders", orderRoutes);
 app.use("/api/customers", customerRoutes);
@@ -49,9 +54,11 @@ app.use("/api/products", productRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/users", userRoutes);
 
-app.all("*", (req, res) => {
-  res.status(500);
-  res.send("Invalid path");
+// !! Your middleware should not go below this line !!
+// Serve frontend client/build folder
+app.use(express.static(path.join(__dirname, "client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 app.listen(app.get("port"), () => {
