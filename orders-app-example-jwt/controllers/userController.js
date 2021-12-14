@@ -59,7 +59,11 @@ exports.login = async (req, res) => {
           secure: false,
           sameSite: "lax",
         })
-        .send("Login successful");
+        .json({
+          message: "Login successful",
+          // we are sending the user as an object with only selected keys
+          user: { username: user.username }, // later I might want to send more keys here
+        });
     } else {
       return res.status(400).json({ message: "Passwords not matching" });
     }
@@ -67,6 +71,19 @@ exports.login = async (req, res) => {
     console.log("the error ", error);
     return res.status(400).json({ message: "General error upon signing in." });
   }
+};
+
+exports.logout = async (req, res) => {
+  // Remove the httpOnly cookie
+
+  res
+    .clearCookie("jwt", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    })
+    .json({ message: "Logout successful" }); // saying we want to send a JSON object
+  //.redirect("/");
 };
 
 exports.listUsers = async (req, res) => {
