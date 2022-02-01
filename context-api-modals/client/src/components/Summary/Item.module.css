@@ -1,0 +1,15 @@
+.container {
+    font-size: 18px;
+    border: 1px solid #282c34;
+}
+
+.title {
+    text-align: left;
+    display: flex;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.plot {
+    text-align: left;
+}
