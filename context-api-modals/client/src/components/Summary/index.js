@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { ModalContext } from "../../contexts/Modal";
+import { ModalContext } from "../../contexts/Modal/Modal";
 import Item from "./Item";
 
 import styles from "./index.module.css";

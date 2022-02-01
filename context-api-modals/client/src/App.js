@@ -1,6 +1,6 @@
 import "./App.css";
 import Summary from "./components/Summary";
-import Modal from "./contexts/Modal";
+import Modal from "./contexts/Modal/Modal";
 
 function App() {
   return (
